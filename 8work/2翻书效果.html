@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+    *{padding:0;margin:0;}
+    .box{
+        width:700px;
+        height:400px;
+        background:url(img/1.jpg) no-repeat;
+        position:relative;
+        margin:100px auto;
+    }
+    .page{
+        width:50%;
+        height:100%;
+        background:#ccc;
+        position:absolute;right:0;top:0;
+        -webkit-transition:1s all ease;
+        -webkit-transform:perspective(800px) rotateY(0deg);
+        -webkit-transform-style:preserve-3d;
+        -webkit-transform-origin:left;
+        -webkit-transform-origin:left;
+        z-index:2;
+    }
+    .page div{
+            width:100%;
+            height:100%;
+            position:absolute;top:0;left:0;
+    }
+    .page .front{
+            background:url(img/1.jpg) no-repeat right;
+            -webkit-transform:translateZ(1px);
+    }
+    .page .back{
+            background:url(img/2.jpg) no-repeat;
+            -webkit-transform:translateZ(-1px) scale(-1,1);
+    }
+    .page2{
+            width:50%;
+            height:100%;
+            position:absolute;right:0;top:0;
+            background:url(img/2.jpg) right;
+            z-index:1;
+    }
+    .box:active .page{
+            -webkit-transform:perspective(800px) rotateY(-180deg);
+    }
+</style>
+</head>
+<body>
+    <div class="box">
+        <div class="page">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="page2"></div>
+    </div>
+</body>
+</html>

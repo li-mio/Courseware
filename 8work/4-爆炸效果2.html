@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+    *{padding:0;margin:0;}
+    .box{width:700px;
+        height:400px;
+        background:url(img/2.jpg)no-repeat; 
+        margin:100px auto;
+        position:relative;
+    }
+    .box span{position:absolute;left:0;top:0;
+            background:url(img/1.jpg) no-repeat;
+    }
+</style>
+<script>
+function rnd(n,m){
+    return Math.floor(Math.random()*(m-n)+n);
+}
+    window.onload=function(){
+        var oBox=document.querySelector('.box');
+        var Row=4;
+        var Col=7;
+
+        for(var i=0;i<Row;i++){
+            for(var j=0;j<Col;j++){
+                var oS=document.createElement('span');
+                oS.style.width=oBox.offsetWidth/Col+'px';
+                oS.style.height=oBox.offsetHeight/Row+'px';
+
+                oBox.appendChild(oS);
+                oS.style.left=j*oS.offsetWidth+'px';
+                oS.style.top=i*oS.offsetHeight+'px';
+                oS.style.backgroundPosition=-j*oS.offsetWidth+"px"-i*oS.offsetWidth+"px";
+            }
+        }
+        var aS=oBox.children;
+        oBox.onclick=function(){
+            for(var i=0;i<aS.length;i++){
+                var x=aS[i].offsetLeft+aS[i].offsetWidth/2-oBox.offsetWidth/2;
+                var y = aS[i].offsetTop+aS[i].offsetHeight/2-oBox.offsetHeight/2;
+
+                aS[i].style.WebkitTransition='1s all ease';
+                aS[i].style.WebkitTransform='translate('+x+'px,'+y+'px) rotateY('+rnd(-360,360)+'deg) rotateX('+rnd(-360,360)+'deg)';
+                aS[i].style.opacity=0;
+
+            }
+            function tranEnd(){
+                aS[aS.length-1].removeEventListener('transitionend',reanEnd,false);
+                aS[i].style.WebkitTransform='tanslate(0,0) rotateY(0deg) totateX(0deg)';
+
+                aS[i].style.opacity=1;
+                aS[i].style.backgroundImage = 'url(img/2.jpg)';
+                oBox.style.backgroundImage = 'url(img/3.jpg)';
+            }
+
+            aS[aS.length-1].addEventListener('transitionend',tranEnd,false);
+        };  
+    };
+</script>
+</head>
+<body>
+    <div class="box">
+        
+    </div>
+</body>
+</html>
