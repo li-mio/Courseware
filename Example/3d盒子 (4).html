@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社--http://www.zhinengshe.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            transform: perspective(800px) rotateY(-60deg) rotateX(30deg);
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        #div1 div{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #div1 .front{
+            transform: translateZ(100px);
+        }
+        #div1 .back{
+            transform: translateZ(-100px);
+        }
+        #div1 .left{
+            transform: translateX(-100px) rotateY(90deg);
+        }
+        #div1 .top{
+            transform: translateY(-100px) rotateX(90deg);
+        }
+        #div1 .bottom{
+            transform: translateY(100px) rotateX(90deg);
+        }
+        #div1 .right{
+            transform: translateX(100px) rotateY(90deg);
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oDiv=document.querySelector('#div1');
+
+            var x=30;
+            var y=-60;
+            oDiv.onmousedown=function(ev){
+                var oEvent=ev || event;
+                var disX=oEvent.clientX-y;
+                var disY=oEvent.clientY-x;
+                document.onmousemove=function(ev){
+                    var oEvent=ev || event;
+                    x=oEvent.clientY-disY;
+                    y=oEvent.clientX-disX;
+                    oDiv.style.transform='perspective(800px) rotateY('+y+'deg) rotateX('+x+'deg)';
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+                return false;
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="div1">
+        <div style="background: #4494ff;" class="front"></div>
+        <div style="background: #c945ff;" class="back"></div>
+        <div style="background: #ff767e;" class="left"></div>
+        <div style="background: #ff6f19;" class="right"></div>
+        <div style="background: #86ff94;" class="top"></div>
+        <div style="background: #fff381;" class="bottom"></div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
