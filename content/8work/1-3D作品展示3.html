@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+    *{padding:0;margin:0;list-style:none;}
+    .ul1{   width:300px;
+            height:300px;
+            margin:100px auto;
+            position:relative;
+            border:1px solid #000;
+            -webkit-transform-style:preserve-3d;
+            perspective:800px;
+        }
+    .ul1 li{width:100%;
+            height:100%;
+            background:#f66;
+            position:absolute;left:0;top:0;
+            line-height:300px;
+            text-align:center;
+            font-size:50px;
+            border:1px solid #000;
+            opacity:0;
+            -webkit-transition:.5s all ease;
+
+        }
+        .ul1 .l2{-webkit-transform:translate(-250px,0) rotateY(45deg);}
+        .ul1 .l1{opacity:1;-webkit-transform:translate(-200px,0) rotateY(45deg);}
+      
+        .ul1 .cur{opacity:1;-webkit-transform:translateZ(40px);}
+        .ul1 .r1{opacity:1;-webkit-transform:translate(200px,0) rotateY(-45deg);}  
+        .ul1 .r2{-webkit-transform:translate(250px,0) rotateY(-45deg);}             
+       
+</style>
+<script>
+    window.onload=function(){
+        var oPrev=document.getElementById('prev');
+        var oNext=document.getElementById('next');
+        var aLi=document.querySelectorAll('.ul1 li');
+        var bOk=false;
+        var aClass=[];
+        for(var i=0;i<aLi.length;i++){
+            aClass.push(aLi[i].className);
+        }
+       
+        oPrev.onclick=function(){
+            if(bOk)return;
+            bOk=true;
+            aClass.push(aClass.shift());
+
+           changeClass();
+             
+        };
+        oNext.onclick=function(){
+            if(bOk)return;
+            bOk=true;
+            aClass.unshift(aClass.pop());
+            console.log(aClass)
+            changeClass();
+            
+        };
+        function changeClass(){
+            for(var i=0;i<aClass.length;i++){
+                aLi[i].className=aClass[i];
+            }
+            var oCur=document.querySelector('.cur');
+
+            function tranEnd(){
+                  oCur.removeEventListener('transitionend',tranEnd,false); 
+                  bOk=false; 
+            }
+            oCur.addEventListener('transitionend',tranEnd,false);
+        }
+      
+    };
+</script>
+</head>
+<body>
+    <a href="javascript:;" id="prev">←</a>
+    <a href="javascript:;" id="next">→</a>
+    <ul class="ul1">
+        <li class="l2">0</li>
+        <li class="l1">1</li>
+        <li class="cur">2</li>
+        <li class="r1">3</li>
+        <li class="r2">4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+    </ul>
+</body>
+</html>

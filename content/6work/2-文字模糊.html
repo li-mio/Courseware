@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<style type="text/css" media="screen">
+    *{padding:0;margin:0;}
+    body{background:#000;}
+    span{font-size:30px;color:rgba(0,0,0,0);text-shadow:0 0 100px #fff;transition:.5s all ease;
+        opacity:0;}
+
+    .active{text-shadow:0 0 0 #fff;opacity:1;}
+</style>
+<script>
+    window.onload=function(){
+        var str='习近平欢迎齐普拉斯在中希建立全面战略伙伴关系10周年之际对中国进行了成功访问，取得重要成果。习近平指出，中国和希腊建交44年来，双方秉承相互尊重、平等互利的原则发展双边关系，结下历久弥新的传统友谊。中国视希腊为欧盟中的战略伙伴，在当前国际形势下，中希两个古老文明国家应该携手同心，巩固政治互信，深化互利合作，推动中希、中欧全面战略伙伴关系再上新台阶。';
+
+        for(var i=0;i<str.length;i++){
+            var oSpan=document.createElement('span');
+            oSpan.innerHTML=str.charAt(i);
+            document.body.appendChild(oSpan);
+
+        }
+
+        var aSpan=document.querySelectorAll('span');
+        var n=0;
+        var timer;
+        timer=setInterval(function(){
+            aSpan[n].classList.add('active');
+            n++;
+            if(n==aSpan.length){
+                clearInterval(timer);
+            }
+        },30);
+    };
+</script>
+<body>
+    
+</body>
+</html>
